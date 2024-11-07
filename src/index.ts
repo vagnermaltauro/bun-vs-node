@@ -6,7 +6,7 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 45001;
 
-type Method = (req: Request) => Buffer | ArrayBuffer | Uint8Array | string | undefined;
+type Method = (req: Request) => Promise<Buffer | ArrayBuffer | Uint8Array | string | undefined>;
 const methodList: Record<string, Method> = methods as any;
 
 app.use(bodyParser.json());
@@ -20,7 +20,8 @@ app.post('/', async (req, res) => {
         return;
     }
 
-    found(req);
+    const out = await found(req);
+    res.status(200).send(out);
 });
 
 app.listen(port, () => {
