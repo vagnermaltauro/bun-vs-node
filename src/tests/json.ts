@@ -1,4 +1,4 @@
-import type { NextFunction, Request, Response } from "express";
+import type { Request } from "express";
 
 function walkBody(body: any): void {
     if (typeof body === "object") {
@@ -12,6 +12,6 @@ function walkBody(body: any): void {
     }
 }
 
-export function json(req: Request, res: Response, next: NextFunction) {
-    walkBody(req.body);
+export async function json(req: Request): Promise<string> {
+    return JSON.stringify(walkBody(req.body));
 }
