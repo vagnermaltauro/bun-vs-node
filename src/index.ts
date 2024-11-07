@@ -1,17 +1,17 @@
 import express from "express";
-import type { NextFunction, Request, Response } from "express";
+import type { Request } from "express";
 import * as methods from "./tests";
 import bodyParser from "body-parser";
 
 const app = express();
 const port = 45001;
 
-type Method = (req: Request, res: Response, next: NextFunction) => void;
-const methodList: Record<string, Method> = methods
+type Method = (req: Request) => Buffer | ArrayBuffer | Uint8Array | string | undefined;
+const methodList: Record<string, Method> = methods as any;
 
 app.use(bodyParser.json());
 
-app.post('/', (req, res, next) => {
+app.post('/', async (req, res) => {
     const method = req.headers["x-method"];
     const found = methodList[method as string];
 
@@ -20,7 +20,7 @@ app.post('/', (req, res, next) => {
         return;
     }
 
-    found(req, res, next);
+    found(req);
 });
 
 app.listen(port, () => {
