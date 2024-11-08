@@ -1,4 +1,4 @@
-import type { Response } from "express";
+import { Request } from "express";
 
-export async function empty(res: Response) { }
+export async function run(req: Request) { }
 

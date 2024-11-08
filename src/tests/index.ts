@@ -1,4 +1,10 @@
-export { json } from './json';
-export { empty } from './empty';
-export { jsonCopy } from './json-copy';
-export { structuredCopy } from './structured-copy';
+export * as json from "./json";
+export * as empty from "./empty";
+export * as jsonCopy from "./jsonCopy";
+export * as structuredCopy from "./structuredCopy";
+export * as gc from "./gc";
+export * as timeout from "./setTimeout";
+export * as file from "./file";
+export * as regex from "./regex";
+export * as regexLong from "./regexLong";
+export * as parsing from "./parsing";

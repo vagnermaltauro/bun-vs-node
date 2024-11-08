@@ -1,4 +1,4 @@
-import type { Request } from "express";
+import { Request } from 'express';
 
 function walkBody(body: any): any {
     if (Array.isArray(body)) {
@@ -22,6 +22,7 @@ function walkBody(body: any): any {
     return body;
 }
 
-export async function json(req: Request): Promise<string> {
-    return JSON.stringify(walkBody(req.body));
+export async function run(req: Request): Promise<string> {
+    const out = JSON.stringify(walkBody(req.body));
+    return out;
 }
